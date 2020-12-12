@@ -2,15 +2,25 @@ from collections import Counter
 
 
 def solver():
-    count = 0
-
     with open("input.txt") as f:
-        for data in f.read().split("\n\n"):
-            x = Counter(data)
-            count += len(
-                Counter({key: num for key, num in x.items() if num == x["\n"] + 1})
+        l = []
+        for line in f:
+            clean_line = line.strip()
+            row = int(
+                "".join(map(lambda x: str(0) if x == "F" else str(1), clean_line[:7])),
+                2,
             )
-    return count
+            col = int(
+                "".join(map(lambda x: str(0) if x == "L" else str(1), clean_line[7:])),
+                2,
+            )
+            l.append(row * 8 + col)
+    # print(Counter(l)[433])
+    l.sort()
+    for i in range(len(l)):
+        if i > 1 and l[i + 1] - l[i - 1] != 2:
+            print(i)
+            return i + l[1]
 
 
 print(solver())
