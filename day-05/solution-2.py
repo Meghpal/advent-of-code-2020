@@ -1,6 +1,3 @@
-from collections import Counter
-
-
 def solver():
     with open("input.txt") as f:
         l = []
@@ -15,7 +12,6 @@ def solver():
                 2,
             )
             l.append(row * 8 + col)
-    # print(Counter(l)[433])
     l.sort()
     for i in range(len(l)):
         if i > 1 and l[i + 1] - l[i - 1] != 2:
